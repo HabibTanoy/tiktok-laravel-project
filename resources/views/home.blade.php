@@ -20,7 +20,7 @@
                         </button>
                     </div>
                 </form>
-               
+
 
                 <div class="splash-subhead hide-after-request">
                     Please, make sure your link looks like this:
@@ -40,19 +40,16 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="" class="btn-block pure-button pure-button-primary text-center u-bl dl-button download_link without_watermark">
+                                    <a href="" class="btn-block pure-button pure-button-primary text-center u-bl dl-button download_link without_watermark" download>
                                         Without watermark
                                     </a>
                                 </div>
                             </div>
-                            <a href="" target="_blank" class="btn-block pure-button pure-button-primary text-center u-bl dl-button download_link without_watermark_direct">
-                                Without watermark [2]
-                            </a>
                             <a href="" class="btn-block pure-button pure-button-primary text-center u-bl dl-button download_link music">
                             Download MP3
                             </a>
                         </div>
-                    </div>          
+                    </div>
                 </div>
             </div>
         </div>
