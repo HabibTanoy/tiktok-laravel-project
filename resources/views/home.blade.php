@@ -41,7 +41,7 @@
                                     <img class="u-round " src="{{$payload['owner_avatar']}}" height="100px" width="100px">
                                 </div>
                                 <div class="col-md-10">
-                                    <p class="maintext mt-4">{{$payload['description']}}</p>
+                                    <p class="maintext mt-4">{{is_null($payload['description']) ? 'Description Not available' : $payload['description'] }}</p>
                                 </div>
                             </div>
                             <div class="row">

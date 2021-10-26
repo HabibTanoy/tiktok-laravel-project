@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -15,12 +16,14 @@ class FetchController extends Controller
     {
         try {
             $payload = $this->prepareFirstAPICall($request->url);
-            $resources = $this->generateAudioVideo($payload);
-            return view('home',compact('resources','payload'));
-        }catch (\Exception $exception)
-        {
+        }catch (ConnectionException $exception) {
+            $payload = $this->prepareSecondAPICall($request->url);
+        }catch (\Exception $exception) {
             return back()->withErrors(['message' => 'Something went wrong. Try again with a valid url.']);
         }
+
+        $resources = $this->generateAudioVideo($payload);
+        return view('home',compact('resources','payload'));
     }
 
     public function downloadAudio(Request $request)
@@ -35,25 +38,27 @@ class FetchController extends Controller
 
     private function prepareFirstAPICall($key)
     {
-        try {
-            $response = Http::withHeaders([
-                'x-rapidapi-host' => 'video-nwm.p.rapidapi.com',
-                'x-rapidapi-key' => 'bfa25cc2eamshcf75fe2ef98e3afp1c23cfjsne3a6fb52723d'
-            ])->get("https://video-nwm.p.rapidapi.com/url/?url=$key")->json();
-            return [
-                'owner_avatar' => $response['item']['author']['avatarMedium'],
-                'description' => $response['item']['desc'],
-                'video' => $response['item']['video']['playAddr'][0]
-            ];
-        }catch (\Exception $exception)
-        {
-            throw new \Exception('Something went wrong',400);
-        }
-
+        $response = Http::timeout(10)->withHeaders([
+            'x-rapidapi-host' => 'video-nwm.p.rapidapi.com',
+            'x-rapidapi-key' => 'bfa25cc2eamshcf75fe2ef98e3afp1c23cfjsne3a6fb52723d'
+        ])->get("https://video-nwm.p.rapidapi.com/url/?url=$key")->json();
+        return [
+            'owner_avatar' => $response['item']['author']['avatarMedium'],
+            'description' => $response['item']['desc'],
+            'video' => $response['item']['video']['playAddr'][0]
+        ];
     }
-    private function prepareSecondAPICall()
+    private function prepareSecondAPICall($key)
     {
-
+        $response = Http::withHeaders([
+            'x-rapidapi-host' => 'tiktok-scrapper-downloader.p.rapidapi.com',
+            'x-rapidapi-key' => 'bfa25cc2eamshcf75fe2ef98e3afp1c23cfjsne3a6fb52723d'
+        ])->get("https://tiktok-scrapper-downloader.p.rapidapi.com/download?url=$key")->json();
+        return [
+            'owner_avatar' => null,
+            'description' => null,
+            'video' => $response['data']['downloadUrlNoWaterMark']
+        ];
     }
 
     private function generateAudioVideo($payload)
