@@ -8,11 +8,11 @@
                 <h1 class="splash-head hide-after-request" id="bigmessage">
                     Download TikTok Video without watermark
                 </h1>
-                <form class="pure-form pure-g hide-after-request" id="_gcaptcha_pt" hx-post="/d3db68fd04b4">
+                <form action="{{route('search')}}" method="POST" class="pure-form pure-g hide-after-request" id="_gcaptcha_pt" hx-post="/d3db68fd04b4">
+                    @csrf
                     <div class="loader loader--style8 htmx-indicator pure-u-1" id="main_loader"></div>
                     <div class="pure-u-1 pure-u-sm-18-24">
-                        <input id="main_page_text" title="https://m.tiktok.com/v/6606727368545406213.html" name="id" type="text" class="form-control input-lg" placeholder="Just insert a link" autofocus />
-                        <input id="locale" name="locale" type="hidden" value="en" />
+                        <input id="main_page_text" name="url" type="text" class="form-control input-lg" placeholder="Just insert a link" autofocus required/>
                     </div>
                     <div class="pure-u-1 pure-u-sm-6-24">
                         <button type="submit" id="submit" class="pure-button pure-button-primary u-fw">
@@ -26,31 +26,38 @@
                     Please, make sure your link looks like this:
                     <pre>https://www.tiktok.com/@youneszarou/video/6942436555692805381<br>or<br>https://vt.tiktok.com/ZSJNV7cVn/</pre>
                 </div>
+                @if ($errors->any())
+                    <span class="alert alert-danger">
+                        {{ $errors->first() }}
+                    </span>
+                @endif
+                @if(isset($resources))
                 <!--link of tiktok-->
                 <div id="target">
                     <div class="result u-shadow--black" id="mainpicture">
                         <div class="result_overlay">
                             <div class="row">
                                 <div class="col-md-2">
-                                <img class="u-round " src="./images/tiktok-img.png" alt="">
+                                    <img class="u-round " src="{{$payload['owner_avatar']}}" height="100px" width="100px">
                                 </div>
                                 <div class="col-md-10">
-                                <p class="maintext mt-4">বিনোদন নিবা 😜😜 #🤪🤪 #blopper #dubai #comydy #pleaseunfrezzemyaccount</p>
+                                    <p class="maintext mt-4">{{$payload['description']}}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="" class="btn-block pure-button pure-button-primary text-center u-bl dl-button download_link without_watermark" download>
+                                    <a href="{{route('download.video',['url' => $resources['video']])}}" class="btn-block pure-button pure-button-primary text-center u-bl dl-button download_link without_watermark">
                                         Without watermark
                                     </a>
                                 </div>
                             </div>
-                            <a href="" class="btn-block pure-button pure-button-primary text-center u-bl dl-button download_link music">
+                            <a href="{{route('download.audio',['url' => $resources['audio']])}}" class="btn-block pure-button pure-button-primary text-center u-bl dl-button download_link music">
                             Download MP3
                             </a>
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </section>

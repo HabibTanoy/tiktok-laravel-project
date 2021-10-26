@@ -8,34 +8,47 @@ use Illuminate\Support\Facades\Storage;
 
 class FetchController extends Controller
 {
+    /**
+     * @throws \Exception
+     */
     public function search(Request $request)
     {
-
+        try {
+            $payload = $this->prepareFirstAPICall($request->url);
+            $resources = $this->generateAudioVideo($payload);
+            return view('home',compact('resources','payload'));
+        }catch (\Exception $exception)
+        {
+            return back()->withErrors(['message' => 'Something went wrong. Try again with a valid url.']);
+        }
     }
 
-    public function downloadAudio()
+    public function downloadAudio(Request $request)
     {
-
+        return response()->download($request->url);
     }
 
-    public function downloadVideo()
+    public function downloadVideo(Request $request)
     {
-
+        return response()->download($request->url);
     }
 
     private function prepareFirstAPICall($key)
     {
-        $response = Http::withHeaders([
-            'x-rapidapi-host' => 'video-nwm.p.rapidapi.com',
-            'x-rapidapi-key' => 'SIGN-UP-FOR-KEY'
-        ])->get("https://video-nwm.p.rapidapi.com/url/",[
-            'url' => $key,
-        ])->body();
-        return [
-            'owner_avatar' => $response->item->author->avatarMedium,
-            'description' => $response->item->desc,
-            'video' => $response->item->video->downloadAddr
-        ];
+        try {
+            $response = Http::withHeaders([
+                'x-rapidapi-host' => 'video-nwm.p.rapidapi.com',
+                'x-rapidapi-key' => 'bfa25cc2eamshcf75fe2ef98e3afp1c23cfjsne3a6fb52723d'
+            ])->get("https://video-nwm.p.rapidapi.com/url/?url=$key")->json();
+            return [
+                'owner_avatar' => $response['item']['author']['avatarMedium'],
+                'description' => $response['item']['desc'],
+                'video' => $response['item']['video']['playAddr'][0]
+            ];
+        }catch (\Exception $exception)
+        {
+            throw new \Exception('Something went wrong',400);
+        }
 
     }
     private function prepareSecondAPICall()
@@ -43,16 +56,14 @@ class FetchController extends Controller
 
     }
 
-    private function generateAudioVideo()
+    private function generateAudioVideo($payload)
     {
         $directory = round(microtime(true) * 1000);
-        Storage::put("$directory/video.mp4",''); //Video Generation
-        shell_exec("ffmpeg -i $directory/video.mp4 -vn -acodec copy $directory/audio.mp3"); //Audio Generation
-
+        Storage::put("resources/$directory/video.mp4",file_get_contents($payload['video'])); //Video Generation
+        shell_exec("ffmpeg -i ".storage_path('app/resources/'.$directory.'/video.mp4')." ".storage_path('app/resources/'.$directory.'/audio.mp3').""); //Audio Generation
         return [
-            'video' => $directory.'/video.mp4',
-            'audio' => $directory.'/audio.mp3'
+            'video' => storage_path('app/resources/'.$directory.'/video.mp4'),
+            'audio' => storage_path('app/resources/'.$directory.'/audio.mp3')
         ];
-
     }
 }
