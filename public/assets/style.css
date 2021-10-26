@@ -1,0 +1,278 @@
+body {
+    font-family: "Roboto, Montserrat",sans-serif;
+}
+
+
+.main_page {
+    background-color: #4054B2;
+}
+
+.custom_header {
+    background-color: #4054B2;
+	min-height: 80vh;
+}
+
+
+.navbar-brand img{ /*
+    width: 300px !important; */
+}
+
+.navbar {
+    max-width: 1100px;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+
+ul li a {
+    color: #fff;
+}
+ul li a:hover {
+    color: #fff;
+}
+.profile_page {
+    background: #EFEFEF;
+}
+
+.search_form {
+    font-size: 24px;
+    text-align: center;
+    margin: 20px;
+}
+.search_box {
+    width: 350px;
+    padding: 10px;
+    height: 42px;
+    /* background: #C8E6C9; */
+    border: 0;
+    color: #666;
+    font-size: 16px;
+}
+.search_button {
+    height: 42px;
+    width: 120px;
+    background: #71cd9f;
+    color: #fff;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    transition: all 0.6s ease 0s;
+    cursor: pointer;
+    border: none;
+    font-size: 17px;
+}
+.profile_info div {
+    display: inline-block;
+    text-align: left;
+    font-size: 24px;
+    margin: 0 8px;
+    font-weight: 600;
+    color: #212121;
+}
+.profile_info span {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: default;
+    color: #212121;
+}
+
+.btn__text {
+    font-weight:700;
+    font-size: .85714286em;
+    color: #fff !important;
+    cursor: pointer !important;
+}
+.button--progress {
+    padding: 16px 32px;
+    background: #71cd9f;
+    font-size: 18px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.footer_modify {
+    background-color: #4054B2;
+    padding: 20px;
+  	border-top: 1px solid #D5DCE5;
+    color: rgba(255,255,255,.5);
+}
+.main_headline {
+    font-size: 34px;
+    letter-spacing: 6px;
+    color: #fff;
+	background: url('/assets/image/arrow.gif') no-repeat center top, #4054B2;
+    min-height: 220px;
+  
+}
+.for_private {
+    color: #3f4454;
+    letter-spacing: 2px;
+    font-family: "Roboto, Montserrat",sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+}
+.text_color {
+    color: #666;
+}
+.info {
+    line-height: 30px;
+}
+.body1 {
+    line-height: 30px;
+}
+.instra {
+    color: #3f4454;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.4rem;
+    font-family: "Roboto, Montserrat",sans-serif;
+    letter-spacing: 1px;
+}
+.info a {
+    text-decoration: none;
+    color: #08cec7;
+}
+.wp-caption-text {
+    font-size: 75%;
+    opacity: .8;
+}
+.private_pic {
+    color: #6EC1E4;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+.for_list {
+    margin-left: -41px;
+}
+.for_list i {
+    color: #6EC1E4;
+}
+.for_story {
+    color: #3f4454;
+    font-size: 18px;
+    font-style: inherit;
+    font-weight: 600;
+}
+.for_install {
+    font-size: 18px;
+}
+.for_alert {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bcdff1;
+    padding: 15px;
+    border-left: 5px solid transparent;
+    position: relative;
+    text-align: left;
+}
+.for_current {
+    font-weight: 600;
+}
+.for_marker {
+    background: rgb(255, 239, 197);
+    white-space: normal;
+    font-weight: 600;
+}
+.for_success {
+    font-size: 10px;
+}
+.for_download {
+    font-weight: 400;
+    color: #6EC1E4;
+}
+.progress-bar {
+    background-color: #6EC1E4;
+}
+.progress {
+    padding: 18px;
+    background-color: #6EC1E4;
+}
+
+
+
+@media (max-width: 991.98px) {
+
+    .navbar-brand img{
+        width: 150px !important;
+    }
+    .for_image {
+        text-align: center;
+    }
+    .for_text {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .for_score {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    img {
+        max-width: 100%;
+    }
+    .profile_info span {
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 960px
+    }
+}
+@media (max-width: 575.98px) {
+    .search_box {
+        margin-bottom: 10px;
+        width: 326px;
+    }
+    .for_private {
+        text-align: center !important
+    }
+    .instra {
+        line-height: 30px;
+        text-align: center;
+    }
+    .for_alert {
+        margin-bottom: 20px;
+    }
+    .for_story {
+        text-align: center;
+    }
+    .container {
+        padding-top: 0px !important;
+    }
+    .for_support {
+        padding-bottom: 0px;
+    }
+}
+
+/* For scroll Button */
+
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #05bcbf;
+    color: white;
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 9px;
+    border-radius: 4px;
+    font-size: 18px;
+}
+#myBtn::after {
+    content: "\f077";
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 12px;
+    color: #fff;
+}
+
