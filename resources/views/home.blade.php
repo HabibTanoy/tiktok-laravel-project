@@ -10,7 +10,9 @@
                 </h1>
                 <form action="{{route('search')}}" method="POST" class="pure-form pure-g hide-after-request" id="_gcaptcha_pt" hx-post="/d3db68fd04b4">
                     @csrf
-                    <div class="loader loader--style8 htmx-indicator pure-u-1" id="main_loader"></div>
+                    <div class="loader loader--style8 htmx-indicator pure-u-1" id="main_loader">
+                    <div class="lds-facebook"><div></div><div></div><div></div></div>
+                    </div>
                     <div class="pure-u-1 pure-u-sm-18-24">
                         <input id="main_page_text" name="url" type="text" class="form-control input-lg" placeholder="Just insert a link" autofocus required/>
                     </div>
