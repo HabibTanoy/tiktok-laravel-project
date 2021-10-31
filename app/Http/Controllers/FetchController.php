@@ -43,6 +43,7 @@ class FetchController extends Controller
             'x-rapidapi-key' => 'bfa25cc2eamshcf75fe2ef98e3afp1c23cfjsne3a6fb52723d'
         ])->get("https://video-nwm.p.rapidapi.com/url/?url=$key")->json();
         return [
+            'id' => $response['item']['id'],
             'owner_avatar' => $response['item']['author']['avatarMedium'],
             'description' => $response['item']['desc'],
             'video' => $response['item']['video']['playAddr'][0]
@@ -55,6 +56,7 @@ class FetchController extends Controller
             'x-rapidapi-key' => 'bfa25cc2eamshcf75fe2ef98e3afp1c23cfjsne3a6fb52723d'
         ])->get("https://tiktok-scrapper-downloader.p.rapidapi.com/download?url=$key")->json();
         return [
+            'id' => rand(),
             'owner_avatar' => null,
             'description' => null,
             'video' => $response['data']['downloadUrlNoWaterMark']
@@ -63,12 +65,13 @@ class FetchController extends Controller
 
     private function generateAudioVideo($payload)
     {
+        $id = $payload['id'];
         $directory = round(microtime(true) * 1000);
-        Storage::put("resources/$directory/video.mp4",file_get_contents($payload['video'])); //Video Generation
-        shell_exec("ffmpeg -i ".storage_path('app/resources/'.$directory.'/video.mp4')." ".storage_path('app/resources/'.$directory.'/audio.mp3').""); //Audio Generation
+        Storage::put("resources/$directory/$id.mp4",file_get_contents($payload['video'])); //Video Generation
+        shell_exec("ffmpeg -i ".storage_path('app/resources/'.$directory.'/'.$id.'.mp4')." ".storage_path('app/resources/'.$directory.'/'.$id.'.mp3').""); //Audio Generation
         return [
-            'video' => storage_path('app/resources/'.$directory.'/video.mp4'),
-            'audio' => storage_path('app/resources/'.$directory.'/audio.mp3')
+            'video' => storage_path('app/resources/'.$directory.'/'.$id.'.mp4'),
+            'audio' => storage_path('app/resources/'.$directory.'/'.$id.'.mp3')
         ];
     }
 }

@@ -1,4 +1,4 @@
-@extends('master')
+@extends('master',['from' => 'ERROR'])
 @section('content')
     <div class="container-fluid text-center" style="min-height: 75vh">
        <div class="mt-5" style="margin-top: 150px !important;">

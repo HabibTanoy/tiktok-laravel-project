@@ -1,4 +1,4 @@
-@extends('master')
+@extends('master',['from' => 'HOME'])
 @section('title','Download TikTok Video without watermark online for free')
 @section('content')
 <main>
