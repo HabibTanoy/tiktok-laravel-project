@@ -5,14 +5,21 @@
     <section>
         <div class="splash-container pt-5" id="splash" hx-ext="include-vals">
             <div class="splash" style="max-width: 1680px;">
-                <h1 class="splash-head hide-after-request" id="bigmessage">
-                    Download TikTok Video without watermark
-                </h1>
-                <form action="{{route('search')}}" method="POST" class="pure-form pure-g hide-after-request" id="_gcaptcha_pt" hx-post="/d3db68fd04b4">
+                <div id="header-message">
+                    <h1 class="splash-head" id="bigmessage">
+                        Download TikTok Video without watermark
+                    </h1>
+                </div>
+                <div id="loader" style="display: none">
+                    <h1 class="splash-head hide-after-request" id="hide-after-request">
+                        YOUR VIDEO IS CONVERTING...
+                        <div class="hide-after-request htmx-indicator pure-u-1" id="main_loader">
+                            <div class="lds-facebook"><div></div><div></div><div></div></div>
+                        </div>
+                    </h1>
+                </div>
+                <form action="{{route('search')}}" method="POST" class="pure-form pure-g" id="_gcaptcha_pt" hx-post="/d3db68fd04b4">
                     @csrf
-                    <div class="loader loader--style8 htmx-indicator pure-u-1" id="main_loader">
-                    <div class="lds-facebook"><div></div><div></div><div></div></div>
-                    </div>
                     <div class="pure-u-1 pure-u-sm-18-24">
                         <input id="main_page_text" name="url" type="text" class="form-control input-lg" placeholder="Just insert a link" autofocus required/>
                     </div>
@@ -24,7 +31,7 @@
                 </form>
 
 
-                <div class="splash-subhead hide-after-request">
+                <div class="splash-subhead">
                     Please, make sure your link looks like this:
                     <pre>https://www.tiktok.com/@youneszarou/video/6942436555692805381<br>or<br>https://vt.tiktok.com/ZSJNV7cVn/</pre>
                 </div>
@@ -245,5 +252,14 @@
         </div>
     </section>
 </main>
-
+<script>
+    $('#submit').click(function (event) {
+        //event.preventDefault();
+        if ($('#main_page_text').val().length > 0)
+        {
+            $('#loader').show();
+            $('#header-message').hide();
+        }
+    });
+</script>
 @endsection

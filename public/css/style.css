@@ -372,9 +372,9 @@ button.pure-button-secondary {
 .processed {
     padding-top: 2em;
 }
-/* .processed .hide-after-request {
+hide-after-request {
     display: none;
-} */
+}
 .splash-head {
     font-size: 1.5em;
     font-weight: 700;
