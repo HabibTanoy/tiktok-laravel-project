@@ -14,10 +14,7 @@
                     <h1 class="splash-head hide-after-request" id="hide-after-request">
                         YOUR VIDEO IS CONVERTING...
                         <div class="hide-after-request htmx-indicator pure-u-1" id="main_loader">
-                            <!-- <div class="lds-facebook"><div></div><div></div><div></div></div> -->
-                                <div class="loadingio-spinner-pulse-t7i54qlaooi"><div class="ldio-i3u8wpoz8ca">
-                                <div></div><div></div><div></div>
-                                </div></div>
+                            <img src="./images/loader.gif" alt="">
                         </div>
                     </h1>
                 </div>
