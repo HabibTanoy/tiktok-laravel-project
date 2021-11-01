@@ -257,6 +257,8 @@
         //event.preventDefault();
         if ($('#main_page_text').val().length > 0)
         {
+            $(this).css("background-color", "yellow");
+            $(this).html("Please wait...");
             $('#loader').show();
             $('#header-message').hide();
         }
