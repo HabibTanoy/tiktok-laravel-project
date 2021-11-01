@@ -1,7 +1,7 @@
 <header>
     <div>
         <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-            <a class="pure-menu-heading" href="">
+            <a class="pure-menu-heading" href="{{route('home')}}">
                 <div class="logo" data-text="SSS TIKTOK"><span>S</span><span>S</span><span>S</span> <i>TIKTOK</i></div>
             </a>
 
