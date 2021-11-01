@@ -14,7 +14,7 @@
                     <h1 class="splash-head hide-after-request" id="hide-after-request">
                         YOUR VIDEO IS CONVERTING...
                         <div class="hide-after-request htmx-indicator pure-u-1" id="main_loader">
-                            <img src="./images/loader.gif" alt="">
+                            <img width="45px" height="40px" src="./images/loader.gif" alt="">
                         </div>
                     </h1>
                 </div>
