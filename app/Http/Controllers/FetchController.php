@@ -40,20 +40,20 @@ class FetchController extends Controller
     {
         $response = Http::timeout(10)->withHeaders([
             'x-rapidapi-host' => 'video-nwm.p.rapidapi.com',
-            'x-rapidapi-key' => 'bfa25cc2eamshcf75fe2ef98e3afp1c23cfjsne3a6fb52723d'
+            'x-rapidapi-key' => '0f1b2ec10fmsh39c93dcaa5ded4dp1b423ajsn0e9c7c328d82'
         ])->get("https://video-nwm.p.rapidapi.com/url/?url=$key")->json();
         return [
             'id' => $response['item']['id'],
             'owner_avatar' => $response['item']['author']['avatarMedium'],
             'description' => $response['item']['desc'],
-            'video' => $response['item']['video']['playAddr'][0]
+            'video' => collect($response['item']['video']['playAddr'])->last()
         ];
     }
     private function prepareSecondAPICall($key)
     {
         $response = Http::withHeaders([
             'x-rapidapi-host' => 'tiktok-scrapper-downloader.p.rapidapi.com',
-            'x-rapidapi-key' => 'bfa25cc2eamshcf75fe2ef98e3afp1c23cfjsne3a6fb52723d'
+            'x-rapidapi-key' => '0f1b2ec10fmsh39c93dcaa5ded4dp1b423ajsn0e9c7c328d82'
         ])->get("https://tiktok-scrapper-downloader.p.rapidapi.com/download?url=$key")->json();
         return [
             'id' => rand(),

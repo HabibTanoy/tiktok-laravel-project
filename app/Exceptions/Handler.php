@@ -37,7 +37,7 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            // dd($e);
+            dd($e);
         });
         $this->renderable(function (ThrottleRequestsException $e, $request) {
             $code = 'REACHED_LIMIT';
